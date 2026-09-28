@@ -234,14 +234,52 @@ img {
     border-color: var(--cor-borda-rpg);
 }
 
-/* PROJETOS (Quests) */
+/* PROJETOS (Quests) - CARROSSEL */
+.carrossel-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 95%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
 .grid-projetos {
     display: flex;
-    flex-wrap: wrap;
     gap: 30px;
-    justify-content: center;
-    width: 95%; /* Expandimos o espaço disponível */
-    max-width: 1200px; /* Limite máximo igual ao do Arsenal */
+    overflow-x: auto; /* Habilita rolagem horizontal */
+    scroll-behavior: smooth;
+    padding: 10px; /* Espaço para o box-shadow não cortar */
+    
+    /* Esconde a barra de rolagem */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    flex: 1; /* Ocupa o espaço entre as setas */
+}
+
+.grid-projetos::-webkit-scrollbar {
+    display: none;
+}
+
+/* Setas do Carrossel */
+.btn-carrossel {
+    background-color: var(--cor-borda-rpg);
+    color: var(--cor-caixa-rpg);
+    border: 3px solid #3e2723;
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 10px 15px;
+    border-radius: 5px;
+    z-index: 10;
+    transition: transform 0.2s;
+    font-family: var(--font-rpg);
+    flex-shrink: 0;
+}
+.btn-carrossel:hover {
+    background-color: #fff;
+}
+.btn-carrossel:active {
+    transform: scale(0.9);
 }
 
 .card-projeto {
@@ -249,9 +287,10 @@ img {
     color: var(--cor-texto-escuro);
     padding: 25px;
     
-    flex: 1 1 45%; /* Ocupa cerca de 45% do espaço (garante 2 por linha) */
-    max-width: 580px; /* Aumentamos o limite para o texto não ficar espremido */
-    min-width: 350px; /* Evita que encolha demais antes de quebrar no celular */
+    /* Alteramos para não encolher e não crescer */
+    flex: 0 0 500px; 
+    max-width: 85vw; /* Garante que não estoure a tela em celulares */
+    min-width: 320px;
     
     border: 3px solid #6b4423;
     box-shadow: 6px 6px 0px rgba(0,0,0,0.6);
@@ -511,20 +550,31 @@ img {
         align-items: center;
     }
 
-    /* Atualize a sua regra do grid-projetos */
-    .grid-projetos {
-        width: 90%; /* Ocupa 90% da tela, deixando 5% de cada lado */
-        margin: 0 auto; /* ESSA É A MÁGICA: força o contêiner a ficar no centro exato! */
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+    /* Atualize a sua regra do grid-projetos para mobile */
+    .carrossel-wrapper {
+        width: 100%; /* Mais espaço no celular */
     }
 
-    /* O card-projeto continua o mesmo, mas agora respeitará o centro do grid */
-    .card-projeto {
+    .grid-projetos {
         width: 100%; 
+        margin: 0;
+        /* Removemos o column para manter o fluxo horizontal de carrossel */
+        display: flex;
+        flex-direction: row; 
+        align-items: stretch;
+    }
+
+    /* O card-projeto continua o mesmo, mas agora respeitará o carrossel */
+    .card-projeto {
+        width: 85vw; /* Ocupa a maior parte da tela */
+        flex: 0 0 85vw; 
         min-width: 0; 
-        margin-bottom: 25px; 
+        margin-bottom: 0; 
+    }
+    
+    /* Oculta as setas em telas muito pequenas (o usuário pode rolar com o dedo) */
+    .btn-carrossel {
+        display: none;
     }
 
 }
