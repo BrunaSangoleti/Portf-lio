@@ -257,6 +257,21 @@ img {
     box-shadow: 6px 6px 0px rgba(0,0,0,0.6);
     position: relative;
     transition: transform 0.2s;
+    
+    /* Flexbox para alinhar conteúdo e jogar botões pro final */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Estilo para as imagens dentro dos cards de projeto */
+.img-projeto {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    object-position: center top;
+    border: 3px solid #3e2723;
+    border-radius: 4px;
+    margin-bottom: 15px;
 }
 /* Melhora a leitura dos textos dentro do mural de missões */
 .card-projeto p {
@@ -282,7 +297,8 @@ img {
 .botoes-projeto {
     display: flex;
     gap: 10px;
-    margin-top: 15px;
+    margin-top: auto; /* Empurra os botões sempre pro fundo do card */
+    padding-top: 15px;
 }
 
 .btn-quest {
